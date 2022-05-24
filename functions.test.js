@@ -1,5 +1,28 @@
 const functions = require("./functions");
 
+// beforeEach(()=> initDatabase());
+// afterEach(()=> closeDatabase());
+
+// beforeAll(()=> initDatabase());
+// afterAll(()=>closeDatabase());
+
+// const initDatabase= ()=> console.log('Database Initialized...');
+// const closeDatabase= ()=> console.log('Database Closed...');
+const nameCheck = ()=>console.log('Checking Name...');
+
+describe ('Checking Name',()=>{
+    beforeEach(()=> nameCheck());
+
+    test('User is Jeff',()=>{
+        const user = 'Jeff';
+        expect(user).toBe('Jeff');
+    })
+    test('User is Karen',()=>{
+        const user = 'Karen';
+        expect(user).toBe('Karen');
+    })
+})
+
 //toBe
 test("2 + 2 is added to equal 4",()=>{
     expect(functions.add(2,2)).toBe(4);
@@ -56,10 +79,20 @@ test('Admin should be usernames',()=>{
 //Install Axios
 
 //Working with async data
-test("user fetched name should be Leanne Graham", ()=>{
+
+//Promise
+// test("user fetched name should be Leanne Graham", ()=>{
+//     expect.assertions(1);
+//     return functions.fetchUser()
+//     .then (data =>{
+//         expect (data.name).toEqual('Pradeep Nepal');
+//     })
+// })
+
+//Async Await
+test("user fetched name should be Leanne Graham", async ()=>{
     expect.assertions(1);
-    return functions.fetchUser()
-    .then (data =>{
-        expect (data.name).toEqual('Leanne Graham');
-    })
+    const data= await functions.fetchUser();
+    expect(data.name).toEqual('Leanne Graham');
+
 })
